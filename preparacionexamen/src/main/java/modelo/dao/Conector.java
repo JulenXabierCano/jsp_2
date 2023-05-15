@@ -11,7 +11,7 @@ public class Conector {
 
 	public static void conectar() {
 		try {
-			String url = "jdbc:mysql://localhost/polideportivo";
+			String url = "jdbc:mysql://localhost/wherehouse";
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conector = (Connection) DriverManager.getConnection(url, "root", "");
 		} catch (Exception e) {

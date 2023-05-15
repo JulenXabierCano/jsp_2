@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
@@ -24,7 +24,7 @@
 				<td>${producto.codigo}</td>
 				<td>${producto.nombre}</td>
 				<td>${producto.cantidad}</td>
-				<td>${producto.precio}</td>
+				<td>${producto.precio}€</td>
 				<td>${producto.caducidad}</td>
 				<td>${producto.id_seccion}</td>
 			</tr>
