@@ -26,7 +26,7 @@ public class ModeloProducto {
 				p.setCantidad(r.getInt(4));
 				p.setPrecio(r.getDouble(5));
 				p.setCaducidad(r.getDate(6));
-				p.setId_seccion(r.getInt(7));
+				p.setSeccion(ModeloSeccion.cargarSeccion(r.getInt(7)));
 				
 				productos.add(p);
 			}

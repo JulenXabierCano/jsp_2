@@ -9,17 +9,17 @@ public class Producto {
 	private int cantidad;
 	private double precio;
 	private java.util.Date caducidad;
-	private int id_seccion;
+	private Seccion seccion;
 
 	public Producto() {
 		super();
 	}
 
-	public Producto(int id, int cantidad, int id_seccion, String codigo, String nombre, Date caducidad, double precio) {
+	public Producto(int id, int cantidad, Seccion seccion, String codigo, String nombre, Date caducidad, double precio) {
 		super();
 		this.id = id;
 		this.cantidad = cantidad;
-		this.id_seccion = id_seccion;
+		this.seccion = seccion;
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.caducidad = caducidad;
@@ -42,12 +42,12 @@ public class Producto {
 		this.cantidad = cantidad;
 	}
 
-	public int getId_seccion() {
-		return id_seccion;
+	public Seccion getSeccion() {
+		return seccion;
 	}
 
-	public void setId_seccion(int id_seccion) {
-		this.id_seccion = id_seccion;
+	public void setSeccion(Seccion seccion) {
+		this.seccion = seccion;
 	}
 
 	public String getCodigo() {
