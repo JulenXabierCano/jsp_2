@@ -5,18 +5,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Super mercados</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+	crossorigin="anonymous">
 </head>
 <body>
-	<table border="3">
-		<tr>
-			<td>ID del producto</td>
-			<td>Codigo del producto</td>
-			<td>Nombre prod.</td>
-			<td>Cantidad</td>
-			<td>Precio</td>
-			<td>Caducidad</td>
-			<td>Seccion</td>
+	<table class="table table-hover table-striped m-auto mt-3 w-75">
+		<tr class="bg-dark">
+			<td class="text-light">ID del producto</td>
+			<td class="text-light">Codigo del producto</td>
+			<td class="text-light">Nombre prod.</td>
+			<td class="text-light">Cantidad</td>
+			<td class="text-light">Precio</td>
+			<td class="text-light">Caducidad</td>
+			<td class="text-light">Seccion</td>
 		</tr>
 		<c:forEach items="${productos}" var="producto">
 			<tr>
@@ -26,7 +31,7 @@
 				<td>${producto.cantidad}</td>
 				<td>${producto.precio}€</td>
 				<td>${producto.caducidad}</td>
-				<td>${producto.seccion.nombre}</td>
+				<td>${producto.seccion.id}</td>
 			</tr>
 		</c:forEach>
 	</table>
