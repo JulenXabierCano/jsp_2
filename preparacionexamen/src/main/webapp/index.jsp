@@ -35,5 +35,6 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<a class="btn btn-info" href="InsertarProducto">Insertar</a>
 </body>
 </html>
