@@ -32,7 +32,6 @@ public class ModeloProducto {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 
 		Conector.cerrar();
@@ -56,11 +55,37 @@ public class ModeloProducto {
 				st.setDate(5, null);
 			}
 			st.setInt(6, p.getSeccion().getId());
-			
+
 			st.execute();
 		} catch (Exception e) {
 		}
 
 		Conector.cerrar();
+	}
+
+	public static boolean comprobar(String dato, String queEs) {
+		final boolean no_se_inserta = false;
+		final boolean se_inserta = true;
+		boolean comprobacion = se_inserta;
+		String sentencia = "select * from productos where ?=?";
+
+		Conector.conectar();
+		try {
+			PreparedStatement st = Conector.conector.prepareStatement(sentencia);
+
+			st.setString(1, queEs);
+			st.setString(2, dato);
+
+			ResultSet r = st.executeQuery();
+
+			if (r.next()) {
+				comprobacion = no_se_inserta;
+			}
+
+		} catch (Exception e) {
+		}
+		Conector.cerrar();
+
+		return comprobacion;
 	}
 }

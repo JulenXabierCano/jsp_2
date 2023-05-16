@@ -35,6 +35,8 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<a class="btn btn-info" href="InsertarProducto">Insertar</a>
+	<div class="w-75 m-auto text-center">
+		<a class="btn btn-info m-2" href="InsertarProducto">Insertar</a>
+	</div>
 </body>
 </html>

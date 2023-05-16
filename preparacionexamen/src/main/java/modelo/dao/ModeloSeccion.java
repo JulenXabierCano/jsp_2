@@ -46,7 +46,6 @@ public class ModeloSeccion {
 			s.setNombre(r.getString(1));
 
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 
 		return s;
