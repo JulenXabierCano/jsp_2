@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import modelo.dao.ModeloProducto;
+import modelo.dao.ModeloSeccion;
 import modelo.dto.Producto;
+import modelo.dto.Seccion;
 
 /**
  * Servlet implementation class InsertarProducto
@@ -31,6 +33,7 @@ public class InsertarProducto extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("secciones", ModeloSeccion.cargarSecciones());
 		request.getRequestDispatcher("insertarForm.jsp").forward(request, response);
 	}
 
@@ -47,12 +50,18 @@ public class InsertarProducto extends HttpServlet {
 		try {
 			caducidad = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("caducidad"));
 		} catch (ParseException e) {
-			
+			e.printStackTrace();
 		}
 		p.setCaducidad(caducidad);
 		
+		int id = Integer.parseInt(request.getParameter("seccion"));
+		p.setSeccion(new Seccion(id,null));
+		
 		ModeloProducto.insertarProducto(p);
-		response.sendRedirect("Inicio");
+		try {
+			response.sendRedirect("Inicio");
+		} catch (Exception e) {
+		}
 	}
 
 }

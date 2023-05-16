@@ -40,7 +40,7 @@ public class ModeloProducto {
 	}
 
 	public static void insertarProducto(Producto p) {
-		String sentencia = "insert into productos (codigo,nombre,cantidad,precio,caducidad) values (?,?,?,?,?)";
+		String sentencia = "insert into productos (codigo,nombre,cantidad,precio,caducidad,id_seccion) values (?,?,?,?,?,?)";
 		Conector.conectar();
 
 		try {
@@ -55,7 +55,8 @@ public class ModeloProducto {
 			} catch (Exception e) {
 				st.setDate(5, null);
 			}
-
+			st.setInt(6, p.getSeccion().getId());
+			
 			st.execute();
 		} catch (Exception e) {
 		}
