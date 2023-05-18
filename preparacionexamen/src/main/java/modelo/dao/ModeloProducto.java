@@ -38,6 +38,36 @@ public class ModeloProducto {
 		return productos;
 	}
 
+	public static Producto cargarProducto(String id) {
+		Producto p = new Producto();
+		String sentencia = "select * from productos where id=?";
+
+		Conector.conectar();
+
+		try {
+			PreparedStatement st = Conector.conector.prepareStatement(sentencia);
+			st.setInt(1, Integer.parseInt(id));
+			ResultSet r = st.executeQuery();
+
+			if (r.next() == false) {
+				System.out.println("No se ha encontrado el objeto");
+			} else {
+				p.setId(r.getInt(1));
+				p.setCodigo(r.getString(2));
+				p.setNombre(r.getString(3));
+				p.setCantidad(r.getInt(4));
+				p.setPrecio(r.getDouble(5));
+				p.setCaducidad(r.getDate(6));
+				p.setSeccion(ModeloSeccion.cargarSeccion(r.getInt(7)));
+			}
+
+		} catch (Exception e) {
+		}
+
+		Conector.cerrar();
+		return p;
+	}
+
 	public static void insertarProducto(Producto p) {
 		String sentencia = "insert into productos (codigo,nombre,cantidad,precio,caducidad,id_seccion) values (?,?,?,?,?,?)";
 		Conector.conectar();
@@ -87,5 +117,28 @@ public class ModeloProducto {
 		Conector.cerrar();
 
 		return comprobacion;
+	}
+
+	public static void modificarProducto(Producto p) {
+		String sentencia = "update productos set nombre=?,cantidad=?,precio=?,caducidad=?,id_seccion=? where codigo=?";
+
+		Conector.conectar();
+
+		try {
+			PreparedStatement st = Conector.conector.prepareStatement(sentencia);
+
+			st.setString(1, p.getNombre());
+			st.setInt(2, p.getCantidad());
+			st.setDouble(3, p.getPrecio());
+			st.setDate(4, new java.sql.Date(p.getCaducidad().getTime()));
+			st.setInt(5, p.getSeccion().getId());
+			st.setString(6, p.getCodigo());
+
+			st.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		Conector.cerrar();
 	}
 }

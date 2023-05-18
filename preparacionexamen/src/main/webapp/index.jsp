@@ -22,6 +22,7 @@
 			<td class="text-light">Precio</td>
 			<td class="text-light">Caducidad</td>
 			<td class="text-light">Seccion</td>
+			<td class="text-light">Modificar</td>
 		</tr>
 		<c:forEach items="${productos}" var="producto">
 			<tr>
@@ -32,6 +33,7 @@
 				<td>${producto.precio}€</td>
 				<td>${producto.caducidad}</td>
 				<td>${producto.seccion.nombre}</td>
+				<td><a href="Modificar?id=${producto.id}" class="btn btn-info">Modificar</a></td>
 			</tr>
 		</c:forEach>
 	</table>
