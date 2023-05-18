@@ -36,6 +36,8 @@ public class InsertarProducto extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setAttribute("secciones", ModeloSeccion.cargarSecciones());
+		String error = (String) request.getParameter("error");
+		request.setAttribute("error", error);
 		request.getRequestDispatcher("insertarForm.jsp").forward(request, response);
 	}
 
@@ -55,22 +57,27 @@ public class InsertarProducto extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		if (codigo_ok && Double.parseDouble(request.getParameter("precio")) < 0 && new java.util.Date().after(caducidad)
-				&& (String) request.getParameter("seccion") != null) {
-			Producto p = new Producto();
-			p.setCodigo(request.getParameter("codigo"));
-			p.setNombre(request.getParameter("nombre"));
-			p.setPrecio(Double.parseDouble(request.getParameter("precio")));
-			p.setCantidad(Integer.parseInt(request.getParameter("cantidad")));
-			p.setCaducidad(caducidad);
+		try {
+			if (codigo_ok && Double.parseDouble(request.getParameter("precio")) < 0 && new java.util.Date().after(caducidad)
+					&& (String) request.getParameter("seccion") != null) {
+				Producto p = new Producto();
+				p.setCodigo(request.getParameter("codigo"));
+				p.setNombre(request.getParameter("nombre"));
+				p.setPrecio(Double.parseDouble(request.getParameter("precio")));
+				p.setCantidad(Integer.parseInt(request.getParameter("cantidad")));
+				p.setCaducidad(caducidad);
 
-			int id = Integer.parseInt(request.getParameter("seccion"));
-			p.setSeccion(new Seccion(id, null));
+				int id = Integer.parseInt(request.getParameter("seccion"));
+				p.setSeccion(new Seccion(id, null));
 
-			ModeloProducto.insertarProducto(p);
-			response.sendRedirect("Inicio");
-		} else {
-			response.sendRedirect("InsertarProducto");
+				ModeloProducto.insertarProducto(p);
+				response.sendRedirect("Inicio");
+			} else {
+				
+				response.sendRedirect("InsertarProducto?error=Error%20hay%20datos%20que%20ya%20existen%20en%20la%20bbdd");
+			}
+		}catch(Exception e) {
+			
 		}
 
 	}
