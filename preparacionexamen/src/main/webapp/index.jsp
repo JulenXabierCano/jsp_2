@@ -13,6 +13,10 @@
 	crossorigin="anonymous">
 </head>
 <body>
+	<form action="Inicio" method="post" class="w-75 p-4 m-auto">
+		<input type="text" name="busqueda" placeholder="Introduzca caracteres a buscar" class="m-auto">
+		<input type="submit" value="Buscar" class="m-auto">
+	</form>
 	<table class="table table-hover table-striped m-auto mt-3 w-75">
 		<tr class="bg-dark">
 			<td class="text-light">ID del producto</td>
