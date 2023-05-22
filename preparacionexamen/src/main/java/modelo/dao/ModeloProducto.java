@@ -141,4 +141,17 @@ public class ModeloProducto {
 
 		Conector.cerrar();
 	}
+
+	public static void eliminarProducto(String parameter) {
+		Conector.conectar();
+		
+		try {
+			PreparedStatement st = Conector.conector.prepareStatement("delete from productos where id=?");
+			st.setString(1, parameter);
+			st.execute();
+		} catch (Exception e) {
+		}
+		
+		Conector.cerrar();
+	}
 }
