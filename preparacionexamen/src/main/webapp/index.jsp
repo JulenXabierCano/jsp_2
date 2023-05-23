@@ -13,14 +13,27 @@
 	crossorigin="anonymous">
 </head>
 <body>
-	<form action="Inicio" method="post" class="w-75 p-4 m-auto">
-		<input type="text" name="busqueda" placeholder="Introduzca caracteres a buscar" class="m-auto">
-		<input type="submit" value="Buscar" class="m-auto">
+	<form action="Inicio" method="get" class="w-75 p-4 m-auto">
+		<input type="text" name="precio_minimo"
+			placeholder="Precio minimo 00.00" class="m-auto" required="required">
+		<input type="text" name="precio_maximo"
+			placeholder="Precio maximo 00.00" class="m-auto"> <input
+			type="submit" value="Filtrar" class="m-auto" name="filtro"
+			required="required">
+	</form>
+	<form action="Inicio" method="get" class="w-75 p-4 m-auto">
+		<input type="text" name="busqueda"
+			placeholder="Introduzca caracteres a buscar" class="m-auto">
+		<input type="submit" value="Buscar" class="m-auto" name="filtro">
 	</form>
 	<table class="table table-hover table-striped m-auto mt-3 w-75">
 		<tr class="bg-dark">
 			<td class="text-light">ID del producto</td>
-			<td class="text-light">Codigo del producto</td>
+			<td class="text-light">Codigo del producto <br>
+			<!----> <a href="Inicio?filtro=codasc">asc </a>
+			<!----> <a href="Inicio?filtro=coddesc"> desc</a>
+			<!----> <!---->
+			</td>
 			<td class="text-light">Nombre prod.</td>
 			<td class="text-light">Cantidad</td>
 			<td class="text-light">Precio</td>
@@ -28,7 +41,7 @@
 			<td class="text-light">Seccion</td>
 			<td class="text-light">Modificar</td>
 			<td class="text-light">Eliminar</td>
-			
+
 		</tr>
 		<c:forEach items="${productos}" var="producto">
 			<tr>

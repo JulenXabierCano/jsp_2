@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import modelo.dao.ModeloProducto;
 import modelo.dto.Producto;
+import utilities.OrdenadorProd;
 
 /**
  * Servlet implementation class Inicio
@@ -33,15 +35,41 @@ public class Inicio extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			String comprobar = request.getParameter("busqueda").toLowerCase();
-			ArrayList<Producto> productos = ModeloProducto.cargarProductos();
 			ArrayList<Producto> productosFiltrados = new ArrayList<Producto>();
-			for (Producto producto : productos) {
-				if (producto.getNombre().contains(comprobar) || producto.getCodigo().contains(comprobar)) {
-					productosFiltrados.add(producto);
+			switch (request.getParameter("filtro").toLowerCase()) {
+			case "Buscar":
+				// Filtrado por contencion de texto
+				String comprobar = request.getParameter("busqueda").toLowerCase();
+				for (Producto producto : ModeloProducto.cargarProductos()) {
+					if (producto.getNombre().contains(comprobar) || producto.getCodigo().contains(comprobar)) {
+						productosFiltrados.add(producto);
+					}
 				}
+				request.setAttribute("productos", productosFiltrados);
+				break;
+			case "Filtrar":
+				// Filtrado por precio
+				Double min = Double.parseDouble(request.getParameter("precio_minimo"));
+				Double max = Double.parseDouble(request.getParameter("precio_maximo"));
+
+				for (Producto producto : ModeloProducto.cargarProductos()) {
+					if (producto.getPrecio() > min && producto.getPrecio() < max) {
+						productosFiltrados.add(producto);
+					}
+				}
+				request.setAttribute("productos", productosFiltrados);
+				break;
+			case "codasc":
+				ArrayList<Producto> productosAsc = ModeloProducto.cargarProductos();
+				Collections.sort(productosAsc, new OrdenadorProd("asc"));
+				request.setAttribute("productos", productosAsc);
+				break;
+			case "coddesc":
+				ArrayList<Producto> productosDesc = ModeloProducto.cargarProductos();
+				Collections.sort(productosDesc, new OrdenadorProd("desc"));
+				request.setAttribute("productos", productosDesc);
+				break;
 			}
-			request.setAttribute("productos", productosFiltrados);
 		} catch (Exception e) {
 			request.setAttribute("productos", ModeloProducto.cargarProductos());
 		}
