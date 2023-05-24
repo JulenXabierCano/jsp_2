@@ -68,7 +68,7 @@ public class ModeloProducto {
 		return p;
 	}
 
-	public static void insertarProducto(Producto p) {
+	public static void insertarProducto(Producto p, String[] supermercados) {
 		String sentencia = "insert into productos (codigo,nombre,cantidad,precio,caducidad,id_seccion) values (?,?,?,?,?,?)";
 		Conector.conectar();
 
@@ -87,6 +87,15 @@ public class ModeloProducto {
 			st.setInt(6, p.getSeccion().getId());
 
 			st.execute();
+
+			sentencia = "insert into productos_supermercados (id_producto,id_supermercado) values (?,?)";
+			st = Conector.conector.prepareStatement(sentencia);
+			int lastId = cargarUltimoID();
+			for (String s : supermercados) {
+				st.setInt(1, lastId);
+				st.setString(2, s);
+				st.execute();
+			}
 		} catch (Exception e) {
 		}
 
@@ -144,14 +153,32 @@ public class ModeloProducto {
 
 	public static void eliminarProducto(String parameter) {
 		Conector.conectar();
-		
+
 		try {
 			PreparedStatement st = Conector.conector.prepareStatement("delete from productos where id=?");
 			st.setString(1, parameter);
 			st.execute();
 		} catch (Exception e) {
 		}
-		
+
 		Conector.cerrar();
+	}
+
+	public static int cargarUltimoID() {
+		int id = 0;
+
+		Conector.conectar();
+
+		try {
+			PreparedStatement st = Conector.conector.prepareStatement("select max(id) from productos");
+			ResultSet r = st.executeQuery();
+			r.next();
+			id = r.getInt(1);
+		} catch (Exception e) {
+		}
+
+		Conector.cerrar();
+
+		return id;
 	}
 }

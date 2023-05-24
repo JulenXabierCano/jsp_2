@@ -35,7 +35,17 @@
 			<c:forEach items="${secciones}" var="seccion">
 				<option value="${seccion.id}">${seccion.nombre}</option>
 			</c:forEach>
-		</select> <input type="submit">
+		</select>
+
+		<c:forEach items="${supermercados}" var="supermercado">
+			<!--  -->
+			<input type="checkbox" name="supermercados" class="m-2"
+				value="${supermercado.id}">${supermercado.nombre}<br>
+		</c:forEach>
+
+
+		<!--  -->
+		<input type="submit" class="d-block">
 	</form>
 </body>
 </html>

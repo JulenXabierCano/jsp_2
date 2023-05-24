@@ -36,7 +36,7 @@ public class Inicio extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			ArrayList<Producto> productosFiltrados = new ArrayList<Producto>();
-			switch (request.getParameter("filtro").toLowerCase()) {
+			switch (request.getParameter("filtro")) {
 			case "Buscar":
 				// Filtrado por contencion de texto
 				String comprobar = request.getParameter("busqueda").toLowerCase();
@@ -70,7 +70,7 @@ public class Inicio extends HttpServlet {
 				request.setAttribute("productos", productosDesc);
 				break;
 			}
-		} catch (Exception e) {
+		} catch (NullPointerException e) {
 			request.setAttribute("productos", ModeloProducto.cargarProductos());
 		}
 		request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -82,7 +82,6 @@ public class Inicio extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
