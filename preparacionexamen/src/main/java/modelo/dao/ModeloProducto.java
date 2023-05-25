@@ -151,14 +151,36 @@ public class ModeloProducto {
 		Conector.cerrar();
 	}
 
-	public static void eliminarProducto(String parameter) {
+	public static void eliminarProducto(String id) {
+		String sentencia = "update productos set cantidad=cantidad-1 where id=?";
+
 		Conector.conectar();
 
-		try {
-			PreparedStatement st = Conector.conector.prepareStatement("delete from productos where id=?");
-			st.setString(1, parameter);
-			st.execute();
-		} catch (Exception e) {
+		if (conseguirStock(id) > 0) {
+			try {
+				PreparedStatement st = Conector.conector.prepareStatement(sentencia);
+				st.setString(1, id);
+				st.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (estaEnSupermercado(id)) {
+			try {
+				PreparedStatement st = Conector.conector
+						.prepareStatement("delete from productos_supermercados where id_producto=?");
+				st.setString(1, id);
+				st.execute();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else { // no hay stock y no está en ninguna tienda
+			try {
+				PreparedStatement st = Conector.conector.prepareStatement("delete from productos where id=?");
+				st.setString(1, id);
+				st.execute();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 		Conector.cerrar();
@@ -175,10 +197,45 @@ public class ModeloProducto {
 			r.next();
 			id = r.getInt(1);
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 		Conector.cerrar();
 
 		return id;
+	}
+
+	protected static int conseguirStock(String id) {
+		int stock = 0;
+
+		try {
+			PreparedStatement st = Conector.conector.prepareStatement("select cantidad from productos where id = ?");
+			st.setString(1, id);
+			ResultSet r = st.executeQuery();
+			r.next();
+			stock = r.getInt(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return stock;
+	}
+
+	private static boolean estaEnSupermercado(String id) {
+		boolean existe = false;
+		String sentencia = "select * from productos_supermercados where id = ?";
+
+		try {
+			PreparedStatement st = Conector.conector.prepareStatement(sentencia);
+			st.setString(1, id);
+			ResultSet r = st.executeQuery();
+			if (r.next()) {
+				existe = true;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return existe;
 	}
 }

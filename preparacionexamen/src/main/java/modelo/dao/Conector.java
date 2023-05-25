@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 public class Conector {
-	protected static Connection conector;
+	public static Connection conector;
 
 	public static void conectar() {
 		try {
