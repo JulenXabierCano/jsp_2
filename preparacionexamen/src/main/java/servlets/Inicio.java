@@ -49,8 +49,18 @@ public class Inicio extends HttpServlet {
 				break;
 			case "Filtrar":
 				// Filtrado por precio
-				Double min = Double.parseDouble(request.getParameter("precio_minimo"));
-				Double max = Double.parseDouble(request.getParameter("precio_maximo"));
+				Double min = 0.0;
+				Double max = Double.POSITIVE_INFINITY;
+				
+				try {
+					min = Double.parseDouble(request.getParameter("precio_minimo"));
+				} catch (Exception e) {
+				}
+				
+				try {
+					max = Double.parseDouble(request.getParameter("precio_maximo"));
+				} catch (Exception e) {
+				}
 
 				for (Producto producto : ModeloProducto.cargarProductos()) {
 					if (producto.getPrecio() > min && producto.getPrecio() < max) {

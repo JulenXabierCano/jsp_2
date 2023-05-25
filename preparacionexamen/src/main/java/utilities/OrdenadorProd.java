@@ -9,7 +9,6 @@ public class OrdenadorProd implements Comparator<Producto> {
 	protected String comparation;
 
 	public OrdenadorProd(String comparation) {
-		super();
 		this.comparation = comparation;
 	}
 

@@ -102,7 +102,7 @@ public class ModeloProducto {
 		Conector.cerrar();
 	}
 
-	public static boolean comprobar(String dato, String queEs) {
+	public static boolean comprobar(String queEs, String dato) {
 		final boolean no_se_inserta = false;
 		final boolean se_inserta = true;
 		boolean comprobacion = se_inserta;
@@ -237,5 +237,20 @@ public class ModeloProducto {
 			e.printStackTrace();
 		}
 		return existe;
+	}
+	
+	public static void purgar(String[] codigos) {
+		Conector.conectar();
+		try {
+			PreparedStatement st = Conector.conector
+					.prepareStatement("delete from productos where codigo=?");
+			for(String codigo:codigos) {
+				st.setString(1, codigo);
+				st.execute();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Conector.cerrar();
 	}
 }

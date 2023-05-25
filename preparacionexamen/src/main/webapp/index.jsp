@@ -15,17 +15,20 @@
 <body>
 	<form action="Inicio" method="get" class="w-75 p-4 m-auto">
 		<input type="text" name="precio_minimo"
-			placeholder="Precio minimo 00.00" class="m-auto" required="required">
+			placeholder="Precio minimo 00.00" class="m-auto">
 		<input type="text" name="precio_maximo"
 			placeholder="Precio maximo 00.00" class="m-auto"> <input
-			type="submit" value="Filtrar" class="m-auto" name="filtro"
-			required="required">
-	</form>
-	<form action="Inicio" method="get" class="w-75 p-4 m-auto">
+			type="submit" value="Filtrar" class="m-auto" name="filtro">
+			<br> <br>
 		<input type="text" name="busqueda"
 			placeholder="Introduzca caracteres a buscar" class="m-auto">
 		<input type="submit" value="Buscar" class="m-auto" name="filtro">
 	</form>
+	<form action="EliminarVarios" method="get" class="w-75 p-4 m-auto">
+		<input type="text" name="codigos" placeholder="Escriba codigos para eliminar, ej: '1,6,90'" class="w-25">
+		<input type="submit" value="Eliminar ID's">
+	</form>
+	
 	<table class="table table-hover table-striped m-auto mt-3 w-75">
 		<tr class="bg-dark">
 			<td class="text-light">ID del producto</td>
