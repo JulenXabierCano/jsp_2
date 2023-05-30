@@ -31,10 +31,16 @@ public class EliminarVarios extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String[] codigos = request.getParameter("codigos").split(",");
+		boolean eliminarCodigos=false;
 		for (String codigo : codigos) {
 			if (ModeloProducto.comprobar("codigo", codigo)) {
-				ModeloProducto.purgar(codigos);
+				eliminarCodigos=true;
+			}else {
+				eliminarCodigos=false;
 			}
+		}
+		if(eliminarCodigos) {
+			ModeloProducto.purgar(codigos);
 		}
 		response.sendRedirect("Inicio");
 	}
