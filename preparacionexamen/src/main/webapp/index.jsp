@@ -40,8 +40,7 @@
 	<div class="w-75 m-auto ">
 		<!-- Button trigger modal -->
 		<button type="button" class="btn btn-primary ms-4"
-			data-bs-toggle="modal" data-bs-target="#exampleModal">Launch
-			demo modal</button>
+			data-bs-toggle="modal" data-bs-target="#exampleModal">Eliminar productos seleccion</button>
 
 		<!-- Modal -->
 		<div class="modal fade" id="exampleModal" tabindex="-1"
