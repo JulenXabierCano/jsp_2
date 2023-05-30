@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import modelo.dao.ModeloProducto;
 import modelo.dto.Producto;
@@ -51,12 +52,12 @@ public class Inicio extends HttpServlet {
 				// Filtrado por precio
 				Double min = 0.0;
 				Double max = Double.POSITIVE_INFINITY;
-				
+
 				try {
 					min = Double.parseDouble(request.getParameter("precio_minimo"));
 				} catch (Exception e) {
 				}
-				
+
 				try {
 					max = Double.parseDouble(request.getParameter("precio_maximo"));
 				} catch (Exception e) {
