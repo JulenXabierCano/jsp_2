@@ -13,6 +13,10 @@
 	crossorigin="anonymous">
 </head>
 <body>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+		crossorigin="anonymous"></script>
 	<form action="Inicio" method="get" class="w-75 p-4 m-auto">
 		<input type="text" name="precio_minimo"
 			placeholder="Precio minimo 00.00" class="m-auto"> <input
@@ -28,6 +32,40 @@
 			placeholder="Escriba codigos para eliminar, ej: '1,6,90'"
 			class="w-25"> <input type="submit" value="Eliminar Codigo(s)">
 	</form>
+
+	<div class="w-75 m-auto ">
+		<!-- Button trigger modal -->
+	<button type="button" class="btn btn-primary ms-4" data-bs-toggle="modal"
+		data-bs-target="#exampleModal">Launch demo modal</button>
+
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">Modal
+						title</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form action="EliminarVarios" method="post">
+						<c:forEach items="${productos}" var="producto">
+							<input type="checkbox" value="${producto.codigo}" name="codigos"> ${producto.nombre} <br>
+						</c:forEach>
+						<input type="submit" value="Eliminar">
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
 
 	<form action="EliminarVarios" method="post">
 		<table class="table table-hover table-striped m-auto mt-3 w-75">
