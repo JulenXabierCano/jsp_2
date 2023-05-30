@@ -30,10 +30,19 @@
 		<input type="date" name="caducidad" placeholder="Fecha Caducidad"
 			class="d-block m-2" value="${p.caducidad}">
 		<!--  -->
-		<input type="text" name="seccion" placeholder="ID de la seccion"
-			class="d-block m-2" value="${p.seccion.id}">
+		<select name="seccion" class="d-block m-2">
+			<c:forEach items="${secciones}" var="seccion">
+				<c:if test="${seccion.id eq p.seccion.id}">
+					<option value="${seccion.id}" selected="selected">${seccion.nombre}</option>
+				</c:if>
+				<c:if test="${seccion.id ne p.seccion.id}">
+					<option value="${seccion.id}">${seccion.nombre}</option>
+				</c:if>
+			</c:forEach>
+		</select>
 		<!--  -->
 		<input type="submit">
 	</form>
+	
 </body>
 </html>

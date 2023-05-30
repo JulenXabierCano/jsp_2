@@ -15,51 +15,53 @@
 <body>
 	<form action="Inicio" method="get" class="w-75 p-4 m-auto">
 		<input type="text" name="precio_minimo"
-			placeholder="Precio minimo 00.00" class="m-auto">
-		<input type="text" name="precio_maximo"
-			placeholder="Precio maximo 00.00" class="m-auto"> <input
-			type="submit" value="Filtrar" class="m-auto" name="filtro">
-			<br> <br>
-		<input type="text" name="busqueda"
+			placeholder="Precio minimo 00.00" class="m-auto"> <input
+			type="text" name="precio_maximo" placeholder="Precio maximo 00.00"
+			class="m-auto"> <input type="submit" value="Filtrar"
+			class="m-auto" name="filtro"> <br> <br> <input
+			type="text" name="busqueda"
 			placeholder="Introduzca caracteres a buscar" class="m-auto">
 		<input type="submit" value="Buscar" class="m-auto" name="filtro">
 	</form>
 	<form action="EliminarVarios" method="get" class="w-75 p-4 m-auto">
-		<input type="text" name="codigos" placeholder="Escriba codigos para eliminar, ej: '1,6,90'" class="w-25">
-		<input type="submit" value="Eliminar ID's">
+		<input type="text" name="codigos"
+			placeholder="Escriba codigos para eliminar, ej: '1,6,90'"
+			class="w-25"> <input type="submit" value="Eliminar Codigo(s)">
 	</form>
-	
-	<table class="table table-hover table-striped m-auto mt-3 w-75">
-		<tr class="bg-dark">
-			<td class="text-light">ID del producto</td>
-			<td class="text-light">Codigo del producto <br>
-			<!----> <a href="Inicio?filtro=codasc">asc </a>
-			<!----> <a href="Inicio?filtro=coddesc"> desc</a>
-			<!----> <!---->
-			</td>
-			<td class="text-light">Nombre prod.</td>
-			<td class="text-light">Cantidad</td>
-			<td class="text-light">Precio</td>
-			<td class="text-light">Caducidad</td>
-			<td class="text-light">Seccion</td>
-			<td class="text-light">Modificar</td>
-			<td class="text-light">Eliminar</td>
 
-		</tr>
-		<c:forEach items="${productos}" var="producto">
-			<tr>
-				<td>${producto.id}</td>
-				<td>${producto.codigo}</td>
-				<td>${producto.nombre}</td>
-				<td>${producto.cantidad}</td>
-				<td>${producto.precio}€</td>
-				<td>${producto.caducidad}</td>
-				<td>${producto.seccion.nombre}</td>
-				<td><a href="Modificar?id=${producto.id}" class="btn btn-info">Modificar</a></td>
-				<td><a href="Eliminar?id=${producto.id}" class="btn btn-danger">Eliminar</a></td>
+	<form action="EliminarVarios" method="post">
+		<table class="table table-hover table-striped m-auto mt-3 w-75">
+			<tr class="bg-dark">
+				<td class="text-light">ID del producto</td>
+				<td class="text-light">Codigo del producto <br> <!----> <a
+					href="Inicio?filtro=codasc">asc </a> <!----> <a
+					href="Inicio?filtro=coddesc"> desc</a> <!----> <!---->
+				</td>
+				<td class="text-light">Nombre prod.</td>
+				<td class="text-light">Cantidad</td>
+				<td class="text-light">Precio</td>
+				<td class="text-light">Caducidad</td>
+				<td class="text-light">Seccion</td>
+				<td class="text-light">Modificar</td>
+				<td class="text-light">Eliminar</td>
+
 			</tr>
-		</c:forEach>
-	</table>
+			<c:forEach items="${productos}" var="producto">
+				<tr>
+					<td>${producto.id}</td>
+					<td>${producto.codigo}</td>
+					<td>${producto.nombre}</td>
+					<td>${producto.cantidad}</td>
+					<td>${producto.precio}€</td>
+					<td>${producto.caducidad}</td>
+					<td>${producto.seccion.nombre}</td>
+					<td><a href="Modificar?id=${producto.id}" class="btn btn-info">Modificar</a></td>
+					<td><a href="Eliminar?id=${producto.id}"
+						class="btn btn-danger">Eliminar</a></td>
+				</tr>
+			</c:forEach>
+		</table>
+	</form>
 	<div class="w-75 m-auto text-center">
 		<a class="btn btn-info m-2" href="InsertarProducto">Insertar</a>
 	</div>

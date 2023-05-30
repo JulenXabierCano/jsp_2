@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import modelo.dao.ModeloProducto;
+import modelo.dao.ModeloSeccion;
 import modelo.dto.Producto;
 import modelo.dto.Seccion;
 
@@ -34,6 +35,7 @@ public class Modificar extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setAttribute("secciones", ModeloSeccion.cargarSecciones()); 	
 		request.setAttribute("p", ModeloProducto.cargarProducto(request.getParameter("id")));
 		request.getRequestDispatcher("modificarProducto.jsp").forward(request, response);
 	}
